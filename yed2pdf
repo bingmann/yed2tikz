@@ -1,0 +1,6 @@
+#! /bin/bash
+
+TEX=`echo $1 | sed -e 's/graphml/tex/'`
+
+./yed2tikz $1
+pdflatex $TEX

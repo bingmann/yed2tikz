@@ -144,6 +144,9 @@
 			<xsl:when test="@type='circle'">
 				<xsl:text>circle</xsl:text>
 			</xsl:when>
+			<xsl:when test="@type='ellipse'">
+				<xsl:text>ellipse</xsl:text>
+			</xsl:when>
 			<xsl:when test="@type='roundrectangle'">
 				<xsl:text>rectangle, rounded corners</xsl:text>
 			</xsl:when>

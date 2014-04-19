@@ -171,7 +171,14 @@
                 <xsl:text>circle</xsl:text>
             </xsl:when>
             <xsl:when test="@type='ellipse'">
-                <xsl:text>ellipse</xsl:text>
+                <xsl:choose>
+                    <xsl:when test="../y:Geometry/@width = ../y:Geometry/@height">
+                        <xsl:text>circle</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>ellipse</xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:when test="@type='roundrectangle'">
                 <xsl:text>rectangle, rounded corners</xsl:text>

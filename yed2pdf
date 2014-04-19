@@ -6,8 +6,9 @@ MY_PATH="`dirname \"$0\"`"
 XSL=$MY_PATH/yed2tikz.xsl
 
 XML=$1
+shift
 TEX=`echo $XML | sed -e 's/graphml/tex/'`
 
-xsltproc --param texwrap 1 $XSL $XML > $TEX 2>/dev/null
+xsltproc --param texwrap 1 $@ $XSL $XML > $TEX 2>/dev/null
 
 pdflatex $TEX

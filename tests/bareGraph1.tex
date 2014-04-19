@@ -1,0 +1,66 @@
+\documentclass{standalone}
+\usepackage{tikz}
+% We need lots of libraries...
+\usetikzlibrary{arrows,shapes.geometric,positioning}
+\begin{document}
+%yed2tikz version:1.0.0
+%define color 
+\definecolor{CFFCC00}{HTML}{FFCC00}
+\definecolor{C000000}{HTML}{000000}
+\definecolor{C0000FF}{HTML}{0000FF}
+\definecolor{CFF0000}{HTML}{FF0000}
+
+\begin{tikzpicture}
+\node (n0) [at={(-120pt,-180pt)}, fill=CFFCC00, draw, align=center, shape=circle, ] {0};
+\node (n1) [at={(180pt,-180pt)}, fill=CFFCC00, draw, align=center, shape=circle, ] {1};
+\node (n2) [at={(30pt,-480pt)}, fill=CFFCC00, draw, align=center, shape=circle, ] {2};
+\node (n3) [at={(30pt,-180pt)}, fill=CFFCC00, draw, align=center, shape=circle, ] {3};
+\node (n4) [at={(30pt,-360pt)}, fill=CFFCC00, draw, align=center, shape=circle, ] {4};
+\node (n5) [at={(30pt,-30pt)}, fill=CFFCC00, draw, align=center, shape=circle, ] {5};
+\node (n6) [at={(-120pt,-360pt)}, fill=CFFCC00, draw, align=center, shape=circle, ] {6};
+\node (n7) [at={(180pt,-360pt)}, fill=CFFCC00, draw, align=center, shape=circle, ] {7};
+
+
+\path [-,draw, C0000FF, ] (n0) -- node [align=center,auto=right,pos=0.1,] {0} (n4);
+
+
+\path [-,draw, CFF0000, ] (n1) -- node [align=center,auto=left,pos=0.1,] {1} (n4);
+
+
+\path [-,draw, C0000FF, ] (n2) -- node [align=center,auto=left,] {2} (n4);
+
+
+\path [-,draw, C0000FF, ] (n0) -- node [align=center,auto=left,] {3} (n5);
+
+
+\path [-,draw, CFF0000, ] (n1) -- node [align=center,auto=right,] {4} (n5);
+
+
+\path [-,draw, C0000FF, ] (n3) -- node [align=center,auto=left,] {5} (n5);
+
+
+\path [-,draw, C0000FF, ] (n0) -- node [align=center,auto=right,] {6} (n6);
+
+
+\path [-,draw, CFF0000, ] (n1) -- node [align=center,auto=right,pos=0.1,] {7} (n6);
+
+
+\path [-,draw, CFF0000, ] (n2) -- node [align=center,auto=left,] {8} (n6);
+
+
+\path [-,draw, CFF0000, ] (n3) -- node [align=center,auto=right,pos=0.9,] {9} (n6);
+
+
+\path [-,draw, CFF0000, ] (n0) -- node [align=center,auto=left,pos=0.1,] {10} (n7);
+
+
+\path [-,draw, C0000FF, ] (n1) -- node [align=center,auto=left,] {11} (n7);
+
+
+\path [-,draw, C0000FF, ] (n2) -- node [align=center,auto=right,] {12} (n7);
+
+
+\path [-,draw, CFF0000, ] (n3) -- node [align=center,auto=left,pos=0.9,] {13} (n7);
+
+\end{tikzpicture}
+\end{document}

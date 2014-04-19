@@ -5,6 +5,12 @@
                 xmlns:y="http://www.yworks.com/xml/graphml"
                 >
 
+    <!-- XSLT parameter: texwrap = 1 then output a LaTeX document -->
+    <xsl:param name="texwrap" select="0"/>
+
+    <!-- XSLT parameter: bare = 1 then output "bare" graph without styles -->
+    <xsl:param name="bare" select="0"/>
+
     <xsl:variable name="version">
         <xsl:text>1.0.0</xsl:text>
     </xsl:variable>
@@ -13,8 +19,6 @@
         <xsl:text>%yed2tikz version:</xsl:text>
         <xsl:value-of select="$version"/>
     </xsl:variable>
-
-    <xsl:param name="texwrap" select="0"/>
 
     <xsl:output method="text" indent="no" encoding="UTF-8"/>
     <xsl:strip-space elements="*"/>
@@ -79,6 +83,7 @@
         </xsl:if>
     </xsl:template>
 
+    <!-- \begin{document} LaTeX wrapper -->
     <xsl:variable name="begin_document">
         <xsl:text>\documentclass{standalone}</xsl:text><xsl:copy-of select="$br" />
         <xsl:text>\usepackage{tikz}</xsl:text><xsl:copy-of select="$br" />
@@ -88,6 +93,7 @@
         <xsl:text>\begin{document}</xsl:text><xsl:copy-of select="$br" />
     </xsl:variable>
 
+    <!-- \end{document} LaTeX wrapper -->
     <xsl:variable name="end_document">
         <xsl:text>\end{document}</xsl:text><xsl:copy-of select="$br" />
     </xsl:variable>
@@ -230,20 +236,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <!-- use label node in pgf -->
-    <xsl:template match="y:NodeLabel">
-        <xsl:text>,align=</xsl:text>
-        <xsl:value-of select="@alignment"/>
-        <xsl:text>,text width=</xsl:text>
-        <xsl:value-of select="@width"/>
-        <xsl:choose>
-            <xsl:when test="@textColor = '#000000'">
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:text>,text=</xsl:text>
-                <xsl:value-of select="concat('C',substring(@textColor,2,6))"/>
-            </xsl:otherwise>
-        </xsl:choose>
+    <xsl:template name="makeFontStyle">
         <xsl:text>,font=\fontfamily{</xsl:text>
         <xsl:choose>
             <xsl:when test="@fontFamily='Dialog'">
@@ -284,6 +277,23 @@
             </xsl:when>
         </xsl:choose>
         <xsl:text>\selectfont</xsl:text>
+    </xsl:template>
+
+    <!-- use label node in pgf -->
+    <xsl:template match="y:NodeLabel">
+        <xsl:text>,align=</xsl:text>
+        <xsl:value-of select="@alignment"/>
+        <xsl:text>,text width=</xsl:text>
+        <xsl:value-of select="@width"/>
+        <xsl:choose>
+            <xsl:when test="@textColor = '#000000'">
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>,text=</xsl:text>
+                <xsl:value-of select="concat('C',substring(@textColor,2,6))"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:call-template name="makeFontStyle"/>
     </xsl:template>
 
     <xsl:template name="makeLabelNode">
@@ -717,47 +727,10 @@
                 <xsl:value-of select="concat('C',substring(@textColor,2,6))"/>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:text>,font=\fontfamily{</xsl:text>
-        <xsl:choose>
-            <xsl:when test="@fontFamily='Dialog'">
-                <xsl:text>phv</xsl:text>
-            </xsl:when>
-            <xsl:when test="@fontFamily='DialogInput'">
-                <xsl:text>ptm</xsl:text>
-            </xsl:when>
-            <xsl:when test="@fontFamily='SansSerif'">
-                <xsl:text>bch</xsl:text>
-            </xsl:when>
-            <xsl:when test="@fontFamily='Serif'">
-                <xsl:text>pnc</xsl:text>
-            </xsl:when>
-            <xsl:when test="@fontFamily='Monospaced'">
-                <xsl:text>pcr</xsl:text>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:text>ptm</xsl:text>
-            </xsl:otherwise>
-        </xsl:choose>
-        <xsl:text>}\fontsize{</xsl:text>
-        <xsl:value-of select="@fontSize"/>
-        <xsl:text>}{</xsl:text>
-        <xsl:value-of select="@fontSize + 1"/>
-        <xsl:text>}</xsl:text>
-        <xsl:choose>
-            <xsl:when test="@fontStyle = 'plain'">
-            </xsl:when>
-            <xsl:when test="@fontStyle = 'bold'">
-                <xsl:text>\fontseries{b}</xsl:text>
-            </xsl:when>
-            <xsl:when test="@fontStyle = 'italic'">
-                <xsl:text>\fontshape{it}</xsl:text>
-            </xsl:when>
-            <xsl:when test="@fontStyle = 'bolditalic'">
-                <xsl:text>\fontshape{it}\fontseries{b}</xsl:text>
-            </xsl:when>
-        </xsl:choose>
-        <xsl:text>\selectfont]</xsl:text>
-        <xsl:text> {</xsl:text>
+
+        <xsl:call-template name="makeFontStyle"/>
+
+        <xsl:text>] {</xsl:text>
         <xsl:value-of select="text()"/>
         <xsl:text>};</xsl:text>
     </xsl:template>

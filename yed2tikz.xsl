@@ -72,7 +72,7 @@
         </xsl:call-template>
         <xsl:value-of select="$br" />
         <!-- options inner sep is 0-->
-        <xsl:text>\begin{tikzpicture}[inner sep=0pt]</xsl:text>
+        <xsl:text>\begin{tikzpicture}</xsl:text>
         <xsl:copy-of select="$br" />
         <xsl:apply-templates></xsl:apply-templates>
         <xsl:copy-of select="$br" />
@@ -153,11 +153,14 @@
 
     <!-- template for geometry -->
     <xsl:template match="y:Geometry">
-        <xsl:text>minimum height=</xsl:text>
-        <xsl:value-of select="concat(@height,$metric)" />
-        <xsl:text>, minimum width=</xsl:text>
-        <xsl:value-of select="concat(@width,$metric)" />
-        <xsl:text>,at={(</xsl:text>
+        <xsl:if test="not($bare)">
+            <xsl:text>minimum height=</xsl:text>
+            <xsl:value-of select="concat(@height,$metric)" />
+            <xsl:text>, minimum width=</xsl:text>
+            <xsl:value-of select="concat(@width,$metric)" />
+            <xsl:text>,</xsl:text>
+        </xsl:if>
+        <xsl:text>at={(</xsl:text>
         <xsl:value-of select="concat((@x + @width div 2),$metric)" />
         <xsl:text>,</xsl:text>
         <xsl:value-of select="concat((-1 * @y - @height div 2),$metric)" />
@@ -290,8 +293,10 @@
     <xsl:template match="y:NodeLabel">
         <xsl:text>,align=</xsl:text>
         <xsl:value-of select="@alignment"/>
-        <xsl:text>,text width=</xsl:text>
-        <xsl:value-of select="@width"/>
+        <xsl:if test="not($bare)">
+            <xsl:text>,text width=</xsl:text>
+            <xsl:value-of select="@width"/>
+        </xsl:if>
         <xsl:choose>
             <xsl:when test="@textColor = '#000000'">
             </xsl:when>
@@ -300,7 +305,9 @@
                 <xsl:value-of select="concat('C',substring(@textColor,2,6))"/>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:call-template name="makeFontStyle"/>
+        <xsl:if test="not($bare)">
+            <xsl:call-template name="makeFontStyle"/>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template name="makeLabelNode">
@@ -384,8 +391,8 @@
     <xsl:template match="y:LineStyle">
         <!-- line width -->
         <xsl:text>line width=</xsl:text>
-        <xsl:value-of select="@width"/>
-        <xsl:text>pt,</xsl:text>
+        <xsl:value-of select="concat(@width,$metric)" />
+        <xsl:text>,</xsl:text>
         <!-- line color -->
         <xsl:choose>
             <xsl:when test="@hasColor='false'">
@@ -717,15 +724,17 @@
             </xsl:otherwise>
         </xsl:choose>
         <xsl:text>) ++(</xsl:text>
-        <xsl:value-of select="@x + @width div 2"/>
+        <xsl:value-of select="@x + (@width div 2)"/>
         <xsl:value-of select="$metric" />
         <xsl:text>,</xsl:text>
-        <xsl:value-of select="-@y - @height div 2"/>
+        <xsl:value-of select="(-1 * @y) - (@height div 2)"/>
         <xsl:value-of select="$metric" />
         <xsl:text>) node [align=</xsl:text>
         <xsl:value-of select="@alignment"/>
-        <xsl:text>,text width=</xsl:text>
-        <xsl:value-of select="@width"/>
+        <xsl:if test="not($bare)">
+            <xsl:text>,text width=</xsl:text>
+            <xsl:value-of select="@width"/>
+        </xsl:if>
         <xsl:choose>
             <xsl:when test="@textColor = '#000000'">
             </xsl:when>
@@ -735,7 +744,9 @@
             </xsl:otherwise>
         </xsl:choose>
 
-        <xsl:call-template name="makeFontStyle"/>
+        <xsl:if test="not($bare)">
+            <xsl:call-template name="makeFontStyle"/>
+        </xsl:if>
 
         <xsl:text>] {</xsl:text>
         <xsl:value-of select="text()"/>

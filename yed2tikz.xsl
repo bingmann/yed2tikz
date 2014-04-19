@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- -*- mode: nxml; tab-width: 4; nxml-child-indent: 4; -*- -->
-<xsl:stylesheet version="2.0"
+<xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:g="http://graphml.graphdrawing.org/xmlns"
                 xmlns:y="http://www.yworks.com/xml/graphml"
@@ -14,7 +14,7 @@
         <xsl:value-of select="$version"/>
     </xsl:variable>
 
-    <xsl:param name="texwrap" select="fragment"/>
+    <xsl:param name="texwrap" select="0"/>
 
     <xsl:output method="text" indent="no" encoding="UTF-8"/>
     <xsl:strip-space elements="*"/>
@@ -51,10 +51,9 @@
         </xsl:if>
     </xsl:template>
 
-
     <xsl:template match="g:graphml">
-        <xsl:if test="y:NodeLabel/@modelPosition='c'">
-            <xsl:value-of select="y:NodeLabel" />
+        <xsl:if test="$texwrap">
+            <xsl:value-of select="$begin_document" />
         </xsl:if>
         <xsl:value-of select="$versiontext"/>
         <xsl:value-of select="$br" />
@@ -72,9 +71,26 @@
         <xsl:text>\begin{tikzpicture}[inner sep=0pt]</xsl:text>
         <xsl:copy-of select="$br" />
         <xsl:apply-templates></xsl:apply-templates>
+        <xsl:copy-of select="$br" />
         <xsl:text>\end{tikzpicture}</xsl:text>
         <xsl:copy-of select="$br" />
+        <xsl:if test="$texwrap">
+            <xsl:value-of select="$end_document" />
+        </xsl:if>
     </xsl:template>
+
+    <xsl:variable name="begin_document">
+        <xsl:text>\documentclass{standalone}</xsl:text><xsl:copy-of select="$br" />
+        <xsl:text>\usepackage{tikz}</xsl:text><xsl:copy-of select="$br" />
+        <xsl:text>% We need lots of libraries...</xsl:text><xsl:copy-of select="$br" />
+        <xsl:text>\usetikzlibrary{arrows,shapes.geometric,positioning}</xsl:text>
+        <xsl:copy-of select="$br" />
+        <xsl:text>\begin{document}</xsl:text><xsl:copy-of select="$br" />
+    </xsl:variable>
+
+    <xsl:variable name="end_document">
+        <xsl:text>\end{document}</xsl:text><xsl:copy-of select="$br" />
+    </xsl:variable>
 
     <xsl:template match="g:node">
         <xsl:text>\node (</xsl:text>

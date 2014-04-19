@@ -1,61 +1,8 @@
 \documentclass{standalone}
 \usepackage{tikz}
 % We need lots of libraries...
-\usetikzlibrary{
-arrows,
-%calc,
-%fit,
-%patterns,
-%plotmarks,
-shapes.geometric,%
-%shapes.misc,
-%shapes.symbols,
-%shapes.arrows,
-%shapes.callouts,
-%shapes.multipart,
-%shapes.gates.logic.US,
-%shapes.gates.logic.IEC,
-%circuits.logic.US,
-%circuits.logic.IEC,
-%circuits.logic.CDH,
-%circuits.ee.IEC,
-%datavisualization,
-%datavisualization.formats.functions,
-%er,
-%automata,
-%backgrounds,
-%chains,
-%topaths,
-%trees,
-%petri,
-%mindmap,
-%matrix,
-%calendar,
-%folding,
-%fadings,
-%shadings,
-%spy,
-%through,
-%turtle,
-positioning,%
-%scopes,
-%decorations.fractals,
-%decorations.shapes,
-%decorations.text,
-%decorations.pathmorphing,
-%decorations.pathreplacing,
-%decorations.footprints,
-%decorations.markings,
-%shadows,
-%lindenmayersystems,
-%intersections,
-%fixedpointarithmetic,
-%fpu,
-%svg.path,
-%external,
-}%
+\usetikzlibrary{arrows,shapes.geometric,positioning}
 \begin{document}
-
 %yed2tikz version:1.0.0
 %define color 
 \definecolor{C808000}{HTML}{808000}
@@ -75,12 +22,13 @@ positioning,%
 \node (n5) [minimum height=30.0pt, minimum width=271.0pt,at={(134.5pt,105pt)}, fill=C993366, draw, line width=1.0pt,align=center,text width=87.19140625,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {Java Language};
 
 
-\path [stealth'-stealth',line width=1.0pt,draw,](n3)--(n2);
+\path [stealth'-stealth',line width=1.0pt,draw,] (n3) -- (n2);
 
 
-\path [stealth'-stealth',line width=1.0pt,draw,](n4)--(n0);
+\path [stealth'-stealth',line width=1.0pt,draw,] (n4) -- (n0);
 
 
-\path [stealth'-stealth',line width=1.0pt,draw,](n5)--(n4);
+\path [stealth'-stealth',line width=1.0pt,draw,] (n5) -- (n4);
+
 \end{tikzpicture}
 \end{document}

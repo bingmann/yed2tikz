@@ -1,5 +1,13 @@
 #! /bin/bash
 
-TEX=`echo $1 | sed -e 's/graphml/tex/'`
+set -e
 
-./yed2tikz $1 && pdflatex $TEX
+MY_PATH="`dirname \"$0\"`"
+XSL=$MY_PATH/yed2tikz.xsl
+
+XML=$1
+TEX=`echo $XML | sed -e 's/graphml/tex/'`
+
+xsltproc --param texwrap 1 $XSL $XML > $TEX 2>/dev/null
+
+pdflatex $TEX

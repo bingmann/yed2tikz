@@ -158,17 +158,17 @@
             <xsl:value-of select="concat(@height,$metric)" />
             <xsl:text>, minimum width=</xsl:text>
             <xsl:value-of select="concat(@width,$metric)" />
-            <xsl:text>,</xsl:text>
+            <xsl:text>, </xsl:text>
         </xsl:if>
         <xsl:text>at={(</xsl:text>
         <xsl:value-of select="concat((@x + @width div 2),$metric)" />
         <xsl:text>,</xsl:text>
         <xsl:value-of select="concat((-1 * @y - @height div 2),$metric)" />
-        <xsl:text>)}</xsl:text>
+        <xsl:text>)}, </xsl:text>
     </xsl:template>
 
     <xsl:template match="y:Shape">
-        <xsl:text>, shape=</xsl:text>
+        <xsl:text>shape=</xsl:text>
         <xsl:choose>
             <xsl:when test="@type='circle'">
                 <xsl:text>circle</xsl:text>
@@ -205,6 +205,7 @@
                 <xsl:text>rectangle</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
+        <xsl:text>, </xsl:text>
     </xsl:template>
 
     <!-- color HEX to .. -->
@@ -213,35 +214,65 @@
             <xsl:when test="@hasColor='false'">
             </xsl:when>
             <xsl:when test="@color='#000000'">
-                <xsl:text>, fill</xsl:text>
+                <xsl:text>fill, </xsl:text>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>, fill=</xsl:text>
+                <xsl:text>fill=</xsl:text>
                 <xsl:value-of select="concat('C',substring(@color,2,6))" />
+                <xsl:text>, </xsl:text>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="y:BorderStyle">
+    <xsl:template match="y:BorderStyle | y:LineStyle">
+        <!-- line color -->
         <xsl:choose>
             <xsl:when test="@hasColor='false'">
             </xsl:when>
             <xsl:when test="@color='#000000'">
-                <xsl:text>, draw</xsl:text>
+                <xsl:text>draw, </xsl:text>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>, draw=</xsl:text>
+                <!-- seperate draw and color, set arrow color-->
+                <xsl:text>draw, </xsl:text>
                 <xsl:value-of select="concat('C',substring(@color,2,6))" />
+                <xsl:text>, </xsl:text>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:text>, line width=</xsl:text>
-        <xsl:value-of select="concat(@width,$metric)" />
+        <!-- line width -->
+        <xsl:choose>
+            <xsl:when test="not($bare)">
+                <xsl:text>line width=</xsl:text>
+                <xsl:value-of select="concat(@width,$metric)" />
+                <xsl:text>, </xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:choose>
+                    <xsl:when test="@width='1.0'">
+                    </xsl:when>
+                    <xsl:when test="@width='2.0'">
+                        <xsl:text>thick, </xsl:text>
+                    </xsl:when>
+                    <xsl:when test="@width='3.0'">
+                        <xsl:text>very thick, </xsl:text>
+                    </xsl:when>
+                    <xsl:when test="@width='4.0'">
+                        <xsl:text>ultra thick, </xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>line width=</xsl:text>
+                        <xsl:value-of select="concat(@width,$metric)" />
+                        <xsl:text>, </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:choose>
             <xsl:when test="@type='dashed'">
-                <xsl:text>, dashed</xsl:text>
+                <xsl:text>dashed, </xsl:text>
             </xsl:when>
             <xsl:when test="@type='dotted'">
-                <xsl:text>, dotted</xsl:text>
+                <xsl:text>dotted, </xsl:text>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
@@ -286,23 +317,28 @@
                 <xsl:text>\fontshape{it}\fontseries{b}</xsl:text>
             </xsl:when>
         </xsl:choose>
-        <xsl:text>\selectfont</xsl:text>
+        <xsl:text>\selectfont, </xsl:text>
     </xsl:template>
 
     <!-- use label node in pgf -->
     <xsl:template match="y:NodeLabel">
-        <xsl:text>,align=</xsl:text>
+        <xsl:text>align=</xsl:text>
         <xsl:value-of select="@alignment"/>
+        <xsl:text>, </xsl:text>
+
         <xsl:if test="not($bare)">
-            <xsl:text>,text width=</xsl:text>
+            <xsl:text>text width=</xsl:text>
             <xsl:value-of select="@width"/>
+            <xsl:text>, </xsl:text>
         </xsl:if>
+
         <xsl:choose>
             <xsl:when test="@textColor = '#000000'">
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>,text=</xsl:text>
+                <xsl:text>text=</xsl:text>
                 <xsl:value-of select="concat('C',substring(@textColor,2,6))"/>
+                <xsl:text>, </xsl:text>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:if test="not($bare)">
@@ -320,7 +356,7 @@
             <xsl:value-of select="$metric" />
             <xsl:text> of </xsl:text>
             <xsl:value-of select="../../@id"></xsl:value-of>
-            <xsl:text>.north west</xsl:text>
+            <xsl:text>.north west, </xsl:text>
             <xsl:apply-templates select="y:NodeLabel"/>
             <xsl:text>]</xsl:text>
             <xsl:text>{</xsl:text>
@@ -386,36 +422,6 @@
         <xsl:apply-templates select="./*/y:BezierEdge"/>
         <xsl:apply-templates select="./*/y:QuadCurveEdge"/>
         <xsl:apply-templates select="./*/*/y:EdgeLabel"/>
-    </xsl:template>
-
-    <xsl:template match="y:LineStyle">
-        <!-- line width -->
-        <xsl:text>line width=</xsl:text>
-        <xsl:value-of select="concat(@width,$metric)" />
-        <xsl:text>,</xsl:text>
-        <!-- line color -->
-        <xsl:choose>
-            <xsl:when test="@hasColor='false'">
-            </xsl:when>
-            <xsl:when test="@color='#000000'">
-                <xsl:text>draw,</xsl:text>
-            </xsl:when>
-            <xsl:otherwise>
-                <!-- seperate draw and color, set arrow color-->
-                <xsl:text>draw,</xsl:text>
-                <xsl:value-of select="concat('C',substring(@color,2,6))" />
-                <xsl:text>,</xsl:text>
-            </xsl:otherwise>
-        </xsl:choose>
-        <!-- line type -->
-        <xsl:choose>
-            <xsl:when test="@type='dashed'">
-                <xsl:text>dashed,</xsl:text>
-            </xsl:when>
-            <xsl:when test="@type='dotted'">
-                <xsl:text>dotted,</xsl:text>
-            </xsl:when>
-        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="create-anchor">

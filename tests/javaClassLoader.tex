@@ -1,0 +1,97 @@
+\documentclass{standalone}
+\usepackage{tikz}
+% We need lots of libraries...
+\usetikzlibrary{
+arrows,
+%calc,
+%fit,
+%patterns,
+%plotmarks,
+shapes.geometric,%
+%shapes.misc,
+%shapes.symbols,
+%shapes.arrows,
+%shapes.callouts,
+%shapes.multipart,
+%shapes.gates.logic.US,
+%shapes.gates.logic.IEC,
+%circuits.logic.US,
+%circuits.logic.IEC,
+%circuits.logic.CDH,
+%circuits.ee.IEC,
+%datavisualization,
+%datavisualization.formats.functions,
+%er,
+%automata,
+%backgrounds,
+%chains,
+%topaths,
+%trees,
+%petri,
+%mindmap,
+%matrix,
+%calendar,
+%folding,
+%fadings,
+%shadings,
+%spy,
+%through,
+%turtle,
+positioning,%
+%scopes,
+%decorations.fractals,
+%decorations.shapes,
+%decorations.text,
+%decorations.pathmorphing,
+%decorations.pathreplacing,
+%decorations.footprints,
+%decorations.markings,
+%shadows,
+%lindenmayersystems,
+%intersections,
+%fixedpointarithmetic,
+%fpu,
+%svg.path,
+%external,
+}%
+\begin{document}
+
+%yed2tikz version:1.0.0
+%define color 
+\definecolor{CFFCC00}{HTML}{FFCC00}
+\definecolor{C000000}{HTML}{000000}
+\definecolor{CFF0000}{HTML}{FF0000}
+
+\begin{tikzpicture}[inner sep=0pt]
+\node (n0) [minimum height=20.0pt, minimum width=200.0pt,at={(100pt,-10pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=133.802734375,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {Bootstrap ClassLoader};
+\node (n1) [minimum height=20.0pt, minimum width=200.0pt,at={(100pt,-67pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=134.86328125,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {Extension ClassLoader};
+\node (n2) [minimum height=20.0pt, minimum width=200.0pt,at={(100pt,-124pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=119.201171875,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {System ClassLoader};
+\node (n3) [minimum height=20.0pt, minimum width=66.0pt,at={(305pt,-124pt)}, line width=1.0pt,align=center,text width=66.6484375,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {-cp or -jar};
+\node (n4) [minimum height=20.0pt, minimum width=94.0pt,at={(319pt,-67pt)}, line width=1.0pt,align=center,text width=94.64453125,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {-Djava.ext.dir=};
+\node (n5) [minimum height=20.0pt, minimum width=81.0pt,at={(312.5pt,-10pt)}, line width=1.0pt,align=center,text width=74.93359375,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {-Xbootstrap};
+\node (n6) [minimum height=20.0pt, minimum width=200.0pt,at={(100pt,-181pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=122.904296875,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {Custom ClassLoader};
+\node (n7) [minimum height=20.0pt, minimum width=81.0pt,at={(-102.5pt,-67pt)}, line width=1.0pt,align=center,text width=73.08203125,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {parent=null};
+\node (n8) [minimum height=20.0pt, minimum width=211.0pt,at={(59.5pt,28pt)}, line width=1.0pt,align=center,text width=197.171875,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {};\node[below right =4.0pt and 6.9140625pt of n8.north west,align=center,text width=197.171875,font=\fontfamily{phv}\fontsize{12}{13}\selectfont]{namespace share and divergence};
+
+
+\path [-stealth',line width=1.0pt,draw,](n3)--(n2);
+
+
+\path [-stealth',line width=1.0pt,draw,](n4)--(n1);
+
+
+\path [-stealth',line width=1.0pt,draw,](n5)--(n0);
+
+
+\path [-stealth',line width=1.0pt,draw,](n1)--(n0);
+
+
+\path [-stealth',line width=1.0pt,draw,](n2)--(n1);
+
+
+\path [-stealth',line width=1.0pt,draw,](n6)--(n2);
+
+
+\path [-stealth',line width=1.0pt,draw,CFF0000,](n6)--(-53.0pt,-181pt)--(-53.0pt,-10pt)--(n0);
+\end{tikzpicture}
+\end{document}

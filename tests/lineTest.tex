@@ -1,0 +1,83 @@
+\documentclass{standalone}
+\usepackage{tikz}
+% We need lots of libraries...
+\usetikzlibrary{
+arrows,
+%calc,
+%fit,
+%patterns,
+%plotmarks,
+shapes.geometric,%
+%shapes.misc,
+%shapes.symbols,
+%shapes.arrows,
+%shapes.callouts,
+%shapes.multipart,
+%shapes.gates.logic.US,
+%shapes.gates.logic.IEC,
+%circuits.logic.US,
+%circuits.logic.IEC,
+%circuits.logic.CDH,
+%circuits.ee.IEC,
+%datavisualization,
+%datavisualization.formats.functions,
+%er,
+%automata,
+%backgrounds,
+%chains,
+%topaths,
+%trees,
+%petri,
+%mindmap,
+%matrix,
+%calendar,
+%folding,
+%fadings,
+%shadings,
+%spy,
+%through,
+%turtle,
+positioning,%
+%scopes,
+%decorations.fractals,
+%decorations.shapes,
+%decorations.text,
+%decorations.pathmorphing,
+%decorations.pathreplacing,
+%decorations.footprints,
+%decorations.markings,
+%shadows,
+%lindenmayersystems,
+%intersections,
+%fixedpointarithmetic,
+%fpu,
+%svg.path,
+%external,
+}%
+\begin{document}
+
+%yed2tikz version:1.0.0
+%define color 
+\definecolor{CFFCC00}{HTML}{FFCC00}
+\definecolor{C000000}{HTML}{000000}
+
+\begin{tikzpicture}[inner sep=0pt]
+\node (n0) [minimum height=30.0pt, minimum width=30.0pt,at={(15pt,-72.76pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=11.23046875,font=\fontfamily{ptm}\fontsize{12}{13}\fontseries{b}\selectfont, shape=rectangle] {2};
+\node (n1) [minimum height=30.0pt, minimum width=30.0pt,at={(15pt,15.48224pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=11.587890625,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {1};
+\node (n2) [minimum height=30.0pt, minimum width=30.0pt,at={(15pt,-161.00224pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=11.23046875,font=\fontfamily{pcr}\fontsize{12}{13}\fontshape{it}\selectfont, shape=rectangle] {3};
+\node (n3) [minimum height=30.0pt, minimum width=30.0pt,at={(96pt,-72.76pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=11.916015625,font=\fontfamily{bch}\fontsize{12}{13}\fontshape{it}\fontseries{b}\selectfont, shape=rectangle] {4};
+\node (n4) [minimum height=30.0pt, minimum width=30.0pt,at={(96pt,15.48224pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=11.62890625,font=\fontfamily{pnc}\fontsize{12}{13}\fontshape{it}\fontseries{b}\selectfont, shape=rectangle] {5};
+
+
+\path [-stealth',line width=1.0pt,draw,](n1)--(n0);
+
+
+\path [-triangle 60,line width=1.0pt,draw,](n0)--(n2);
+
+
+\path [-triangle 60,line width=1.0pt,draw,](n2)--(96.0pt,-161.00224pt)--(n3);
+
+
+\path [-stealth',line width=1.0pt,draw,](n3)--(n4);
+\end{tikzpicture}
+\end{document}

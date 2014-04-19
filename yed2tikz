@@ -1,5 +1,7 @@
 #! /bin/bash
 
+set -e
+
 XSL=yed2tikz.xsl
 XML=$1
 TEX=`echo $1 | sed -e 's/graphml/tex/'`

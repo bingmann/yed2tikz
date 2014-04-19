@@ -1,0 +1,86 @@
+\documentclass{standalone}
+\usepackage{tikz}
+% We need lots of libraries...
+\usetikzlibrary{
+arrows,
+%calc,
+%fit,
+%patterns,
+%plotmarks,
+shapes.geometric,%
+%shapes.misc,
+%shapes.symbols,
+%shapes.arrows,
+%shapes.callouts,
+%shapes.multipart,
+%shapes.gates.logic.US,
+%shapes.gates.logic.IEC,
+%circuits.logic.US,
+%circuits.logic.IEC,
+%circuits.logic.CDH,
+%circuits.ee.IEC,
+%datavisualization,
+%datavisualization.formats.functions,
+%er,
+%automata,
+%backgrounds,
+%chains,
+%topaths,
+%trees,
+%petri,
+%mindmap,
+%matrix,
+%calendar,
+%folding,
+%fadings,
+%shadings,
+%spy,
+%through,
+%turtle,
+positioning,%
+%scopes,
+%decorations.fractals,
+%decorations.shapes,
+%decorations.text,
+%decorations.pathmorphing,
+%decorations.pathreplacing,
+%decorations.footprints,
+%decorations.markings,
+%shadows,
+%lindenmayersystems,
+%intersections,
+%fixedpointarithmetic,
+%fpu,
+%svg.path,
+%external,
+}%
+\begin{document}
+
+%yed2tikz version:1.0.0
+%define color 
+\definecolor{C808000}{HTML}{808000}
+\definecolor{C000000}{HTML}{000000}
+\definecolor{CCCFFFF}{HTML}{CCFFFF}
+\definecolor{CFFCC00}{HTML}{FFCC00}
+\definecolor{C666699}{HTML}{666699}
+\definecolor{CCC99FF}{HTML}{CC99FF}
+\definecolor{C993366}{HTML}{993366}
+
+\begin{tikzpicture}[inner sep=0pt]
+\node (n0) [minimum height=60.0pt, minimum width=271.0pt,at={(134.5pt,-30pt)}, fill=C808000, draw, line width=1.0pt,align=center,text width=121.205078125,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {Java Virtual Machine};
+\node (n1) [minimum height=30.0pt, minimum width=384.0pt,at={(192pt,-83pt)}, fill=CCCFFFF, draw, line width=1.0pt,align=center,text width=111.02734375,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {OS(linux,windows)};
+\node (n2) [minimum height=60.0pt, minimum width=84.0pt,at={(342pt,-30pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=81.349609375,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {Native library};
+\node (n3) [minimum height=30.0pt, minimum width=30.0pt,at={(255pt,-30pt)}, fill=C666699, draw, line width=1.0pt,align=center,text width=20.0546875,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle, rounded corners] {JNI};
+\node (n4) [minimum height=30.0pt, minimum width=271.0pt,at={(134.5pt,45pt)}, fill=CCC99FF, draw, line width=1.0pt,align=center,text width=49.36328125,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {Java API};
+\node (n5) [minimum height=30.0pt, minimum width=271.0pt,at={(134.5pt,105pt)}, fill=C993366, draw, line width=1.0pt,align=center,text width=87.19140625,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {Java Language};
+
+
+\path [stealth'-stealth',line width=1.0pt,draw,](n3)--(n2);
+
+
+\path [stealth'-stealth',line width=1.0pt,draw,](n4)--(n0);
+
+
+\path [stealth'-stealth',line width=1.0pt,draw,](n5)--(n4);
+\end{tikzpicture}
+\end{document}

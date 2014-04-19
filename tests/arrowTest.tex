@@ -1,0 +1,111 @@
+\documentclass{standalone}
+\usepackage{tikz}
+% We need lots of libraries...
+\usetikzlibrary{
+arrows,
+%calc,
+%fit,
+%patterns,
+%plotmarks,
+shapes.geometric,%
+%shapes.misc,
+%shapes.symbols,
+%shapes.arrows,
+%shapes.callouts,
+%shapes.multipart,
+%shapes.gates.logic.US,
+%shapes.gates.logic.IEC,
+%circuits.logic.US,
+%circuits.logic.IEC,
+%circuits.logic.CDH,
+%circuits.ee.IEC,
+%datavisualization,
+%datavisualization.formats.functions,
+%er,
+%automata,
+%backgrounds,
+%chains,
+%topaths,
+%trees,
+%petri,
+%mindmap,
+%matrix,
+%calendar,
+%folding,
+%fadings,
+%shadings,
+%spy,
+%through,
+%turtle,
+positioning,%
+%scopes,
+%decorations.fractals,
+%decorations.shapes,
+%decorations.text,
+%decorations.pathmorphing,
+%decorations.pathreplacing,
+%decorations.footprints,
+%decorations.markings,
+%shadows,
+%lindenmayersystems,
+%intersections,
+%fixedpointarithmetic,
+%fpu,
+%svg.path,
+%external,
+}%
+\begin{document}
+
+%yed2tikz version:1.0.0
+%define color 
+\definecolor{CFFCC00}{HTML}{FFCC00}
+\definecolor{C000000}{HTML}{000000}
+
+\begin{tikzpicture}[inner sep=0pt]
+\node (n0) [minimum height=30.0pt, minimum width=30.0pt,at={(189pt,25pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=4.0,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {};
+\node (n1) [minimum height=30.0pt, minimum width=30.0pt,at={(-51pt,-80pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=4.0,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {};
+\node (n2) [minimum height=30.0pt, minimum width=30.0pt,at={(9pt,-80pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=4.0,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {};
+\node (n3) [minimum height=30.0pt, minimum width=30.0pt,at={(69pt,-80pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=4.0,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {};
+\node (n4) [minimum height=30.0pt, minimum width=30.0pt,at={(129pt,-80pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=4.0,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {};
+\node (n5) [minimum height=30.0pt, minimum width=30.0pt,at={(189pt,-80pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=4.0,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {};
+\node (n6) [minimum height=30.0pt, minimum width=30.0pt,at={(249pt,-80pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=4.0,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {};
+\node (n7) [minimum height=30.0pt, minimum width=30.0pt,at={(309pt,-80pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=4.0,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {};
+\node (n8) [minimum height=30.0pt, minimum width=30.0pt,at={(369pt,-80pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=4.0,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {};
+\node (n9) [minimum height=30.0pt, minimum width=30.0pt,at={(429pt,-80pt)}, fill=CFFCC00, draw, line width=1.0pt,align=center,text width=4.0,font=\fontfamily{phv}\fontsize{12}{13}\selectfont, shape=rectangle] {};
+\path (node cs:name=n0)++(-13.333333333333332pt,-15pt) coordinate (e0n0){};
+
+\coordinate (e0n1) at (node cs:name=n1, anchor=north);
+\path [-stealth',line width=1.0pt,draw,](e0n0)--(175.66666666666666pt,-5pt)--(-51.0pt,-5pt)--(e0n1);
+\path (node cs:name=n0)++(-10.0pt,-15pt) coordinate (e1n0){};
+
+\coordinate (e1n2) at (node cs:name=n2, anchor=north);
+\path [-triangle 60,line width=1.0pt,draw,](e1n0)--(179.0pt,-20pt)--(9.0pt,-20pt)--(e1n2);
+\path (node cs:name=n0)++(-6.666666666666668pt,-15pt) coordinate (e2n0){};
+
+\coordinate (e2n3) at (node cs:name=n3, anchor=north);
+\path [-open triangle 60,line width=1.0pt,draw,](e2n0)--(182.33333333333334pt,-35pt)--(69.0pt,-35pt)--(e2n3);
+\path (node cs:name=n0)++(-3.3333333333333357pt,-15pt) coordinate (e3n0){};
+
+\coordinate (e3n4) at (node cs:name=n4, anchor=north);
+\path [-diamond,line width=1.0pt,draw,](e3n0)--(185.66666666666666pt,-50pt)--(129.0pt,-50pt)--(e3n4);
+\coordinate (e4n0) at (node cs:name=n0, anchor=south);
+\coordinate (e4n5) at (node cs:name=n5, anchor=north);
+\path [-open diamond,line width=1.0pt,draw,](e4n0)--(e4n5);
+\path (node cs:name=n0)++(3.333333333333332pt,-15pt) coordinate (e5n0){};
+
+\coordinate (e5n6) at (node cs:name=n6, anchor=north);
+\path [-o,line width=1.0pt,draw,](e5n0)--(192.33333333333334pt,-50pt)--(249.0pt,-50pt)--(e5n6);
+\path (node cs:name=n0)++(6.666666666666666pt,-15pt) coordinate (e6n0){};
+
+\coordinate (e6n7) at (node cs:name=n7, anchor=north);
+\path [-*,line width=1.0pt,draw,](e6n0)--(195.66666666666666pt,-35pt)--(309.0pt,-35pt)--(e6n7);
+\path (node cs:name=n0)++(10.0pt,-15pt) coordinate (e7n0){};
+
+\coordinate (e7n8) at (node cs:name=n8, anchor=north);
+\path [-angle 45,line width=1.0pt,draw,](e7n0)--(199.0pt,-20pt)--(369.0pt,-20pt)--(e7n8);
+\path (node cs:name=n0)++(13.333333333333334pt,-15pt) coordinate (e8n0){};
+
+\coordinate (e8n9) at (node cs:name=n9, anchor=north);
+\path [-stealth,line width=1.0pt,draw,](e8n0)--(202.33333333333334pt,-5pt)--(429.0pt,-5pt)--(e8n9);
+\end{tikzpicture}
+\end{document}

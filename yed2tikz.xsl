@@ -5,11 +5,9 @@
    xmlns:y="http://www.yworks.com/xml/graphml"
 	>
 
-
 	<xsl:variable name="version">
 		<xsl:text>1.0.0</xsl:text>
 	</xsl:variable>
-
 
 	<xsl:variable name="versiontext">
 		<xsl:text>%yed2tikz version:</xsl:text>
@@ -22,6 +20,7 @@
 	<xsl:variable name="br">
 		<xsl:text>&#10;</xsl:text>
 	</xsl:variable>
+
 	<xsl:variable name="metric">
 		<xsl:text>pt</xsl:text>
 	</xsl:variable>
@@ -472,7 +471,7 @@
 		<xsl:text>\path [</xsl:text>
 		<xsl:apply-templates select="y:Arrows"/>
 		<xsl:apply-templates select="y:LineStyle"/>
-		<xsl:text>]</xsl:text>
+		<xsl:text>] </xsl:text>
 
 		<!-- set up source -->
 		<xsl:text>(</xsl:text>
@@ -488,11 +487,11 @@
 
 		<!-- parse path -->
 		<xsl:for-each select="./y:Path/y:Point">
-			<xsl:text>--(</xsl:text>
+			<xsl:text> -- (</xsl:text>
 			<xsl:apply-templates select="."/>
 			<xsl:text>)</xsl:text>
 		</xsl:for-each>
-		<xsl:text>--</xsl:text>
+		<xsl:text> -- </xsl:text>
 
 		<!-- set up target -->
 		<xsl:text>(</xsl:text>
@@ -660,9 +659,10 @@
 
 	<xsl:template match="y:Point">
 		<xsl:value-of select="@x"/>
-		<xsl:text>pt,</xsl:text>
+                <xsl:value-of select="$metric" />
+		<xsl:text>,</xsl:text>
 		<xsl:value-of select="-1 * @y"/>
-		<xsl:text>pt</xsl:text>
+                <xsl:value-of select="$metric" />
 	</xsl:template>
 
 	<!-- use edge label node in pgf -->
@@ -680,9 +680,11 @@
 		</xsl:choose>
 		<xsl:text>) ++(</xsl:text>
 		<xsl:value-of select="@x + @width div 2"/>
-		<xsl:text>pt,</xsl:text>
+                <xsl:value-of select="$metric" />
+		<xsl:text>,</xsl:text>
 		<xsl:value-of select="-@y - @height div 2"/>
-		<xsl:text>pt)node[align=</xsl:text>
+                <xsl:value-of select="$metric" />
+		<xsl:text>) node [align=</xsl:text>
 		<xsl:value-of select="@alignment"/>
 		<xsl:text>,text width=</xsl:text>
 		<xsl:value-of select="@width"/>
@@ -734,7 +736,7 @@
 			</xsl:when>
 		</xsl:choose>
 		<xsl:text>\selectfont]</xsl:text>
-		<xsl:text>{</xsl:text>
+		<xsl:text> {</xsl:text>
 		<xsl:value-of select="text()"/>
 		<xsl:text>};</xsl:text>
 	</xsl:template>

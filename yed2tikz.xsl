@@ -421,7 +421,9 @@
         <xsl:apply-templates select="./*/y:PolyLineEdge"/>
         <xsl:apply-templates select="./*/y:BezierEdge"/>
         <xsl:apply-templates select="./*/y:QuadCurveEdge"/>
-        <xsl:apply-templates select="./*/*/y:EdgeLabel"/>
+        <xsl:if test="not($bare)">
+            <xsl:apply-templates select="./*/*/y:EdgeLabel"/>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template name="create-anchor">
@@ -543,6 +545,10 @@
             <xsl:text>)</xsl:text>
         </xsl:for-each>
         <xsl:text> -- </xsl:text>
+
+        <xsl:if test="$bare">
+            <xsl:apply-templates select="y:EdgeLabel"/>
+        </xsl:if>
 
         <!-- set up target -->
         <xsl:text>(</xsl:text>
@@ -718,6 +724,17 @@
 
     <!-- use edge label node in pgf -->
     <xsl:template match="y:EdgeLabel">
+        <xsl:choose>
+            <xsl:when test="$bare">
+                <xsl:call-template name="makeEdgeLabelBare"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="makeEdgeLabel"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="makeEdgeLabel">
         <xsl:text>\path </xsl:text>
 
         <xsl:text>(</xsl:text>
@@ -757,6 +774,59 @@
         <xsl:text>] {</xsl:text>
         <xsl:value-of select="text()"/>
         <xsl:text>};</xsl:text>
+    </xsl:template>
+
+    <xsl:template name="makeEdgeLabelBare" match="y:EdgeLabel[modelName='six_pos']">
+
+        <xsl:text>node [align=</xsl:text>
+        <xsl:value-of select="@alignment"/>
+        <xsl:text>,</xsl:text>
+
+        <xsl:if test="not($bare)">
+            <xsl:text>text width=</xsl:text>
+            <xsl:value-of select="@width"/>
+            <xsl:text>,</xsl:text>
+        </xsl:if>
+
+        <xsl:choose>
+            <xsl:when test="@modelPosition = 'shead'">
+                <xsl:text>auto=left,pos=0.1,</xsl:text>
+            </xsl:when>
+            <xsl:when test="@modelPosition = 'head'">
+                <xsl:text>auto=left,</xsl:text>
+            </xsl:when>
+            <xsl:when test="@modelPosition = 'thead'">
+                <xsl:text>auto=left,pos=0.9,</xsl:text>
+            </xsl:when>
+            <xsl:when test="@modelPosition = 'stail'">
+                <xsl:text>auto=right,pos=0.1,</xsl:text>
+            </xsl:when>
+            <xsl:when test="@modelPosition = 'tail'">
+                <xsl:text>auto=right,</xsl:text>
+            </xsl:when>
+            <xsl:when test="@modelPosition = 'ttail'">
+                <xsl:text>auto=right,pos=0.9,</xsl:text>
+            </xsl:when>
+        </xsl:choose>
+
+        <xsl:choose>
+            <xsl:when test="@textColor = '#000000'">
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>text=</xsl:text>
+                <xsl:value-of select="concat('C',substring(@textColor,2,6))"/>
+                <xsl:text>,</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+
+        <xsl:if test="not($bare)">
+            <xsl:call-template name="makeFontStyle"/>
+        </xsl:if>
+
+        <xsl:text>] {</xsl:text>
+        <xsl:value-of select="text()"/>
+        <xsl:text>} </xsl:text>
+
     </xsl:template>
 
 </xsl:stylesheet>

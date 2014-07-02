@@ -6,7 +6,7 @@
                 >
 
     <!-- XSLT parameter: texwrap = 1 then output a LaTeX document -->
-    <xsl:param name="texwrap" select="0"/>
+    <xsl:param name="texwrap" select="document"/>
 
     <!-- XSLT parameter: bare = 1 then output "bare" graph without styles -->
     <xsl:param name="bare" select="0"/>
@@ -56,7 +56,7 @@
     </xsl:template>
 
     <xsl:template match="g:graphml">
-        <xsl:if test="$texwrap">
+        <xsl:if test="$texwrap='document'">
             <xsl:value-of select="$begin_document" />
         </xsl:if>
         <xsl:value-of select="$versiontext"/>
@@ -72,13 +72,17 @@
         </xsl:call-template>
         <xsl:value-of select="$br" />
         <!-- options inner sep is 0-->
-        <xsl:text>\begin{tikzpicture}</xsl:text>
-        <xsl:copy-of select="$br" />
+        <xsl:if test="$texwrap='document' or $texwrap='picture'">
+            <xsl:text>\begin{tikzpicture}</xsl:text>
+            <xsl:copy-of select="$br" />
+        </xsl:if>
         <xsl:apply-templates></xsl:apply-templates>
         <xsl:copy-of select="$br" />
-        <xsl:text>\end{tikzpicture}</xsl:text>
-        <xsl:copy-of select="$br" />
-        <xsl:if test="$texwrap">
+        <xsl:if test="$texwrap='document' or $texwrap='picture'">
+            <xsl:text>\end{tikzpicture}</xsl:text>
+            <xsl:copy-of select="$br" />
+        </xsl:if>
+        <xsl:if test="$texwrap='document'">
             <xsl:value-of select="$end_document" />
         </xsl:if>
     </xsl:template>
